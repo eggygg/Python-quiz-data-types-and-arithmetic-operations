@@ -1,0 +1,375 @@
+#Create a class named Book.
+#The __init__ method should initialize title, author, and price.
+#Define a method display_info that prints the book's details.
+
+class Book:
+    def __init__(self, title, author, price):
+        self.title = title
+        self.author = author
+        self.price = price
+    
+    def display_info(self):
+        print(f"Title: {self.title}, Author: {self.author}, Price: ${self.price}")
+        
+# Example Usage:
+book1 = Book("1984", "George Orwell", 15.99)
+book1.display_info()
+# Expected Output: Title: 1984, Author: George Orwell, Price: $15.99
+
+
+
+
+
+QUESTION 2 
+#Implement a Rectangle Class with Area Calculation
+
+#Create a Rectangle class that can calculate its area.
+#Define a class named Rectangle.
+#The __init__ method should initialize width and height.
+#Implement a method area that returns the area of the rectangle.
+
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+    
+    def area(self):
+        return self.width * self.height
+
+# Example Usage:
+rect = Rectangle(5, 3)
+print(rect.area())  # Expected Output: 15
+
+
+
+
+
+QUESTION 3
+#Create an Employee Class with a Method to Display Details
+#Define an Employee class with attributes and a method to display employee details.
+
+#Create a class named Employee.
+#The __init__ method should initialize name, position, and salary.
+#Define a method display_details that prints the employee's information.
+
+class Employee:
+    def __init__(self, name, position, salary):
+        self.name = name
+        self.position = position
+        self.salary = salary
+    
+    def display_details(self):
+        print(f"Name: {self.name}, Position: {self.position}, Salary: ${self.salary}")
+
+# Example Usage:
+emp = Employee("Alice", "Developer", 70000)
+emp.display_details()
+# Expected Output: Name: Alice, Position: Developer, Salary: $70000
+
+
+
+
+
+QUESTION 4
+#Inheritance - Create a Student Class that Inherits from Person
+#Implement inheritance by creating a Student class that inherits from a Person class.
+#Define a base class Person with attributes name and age.
+#Create a subclass Student that inherits from Person and adds student_id.
+#Implement a method display_info in both classes to show respective details.
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    
+    def display_info(self):
+        print(f"Name: {self.name}, Age: {self.age}")
+
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+    
+    def display_info(self):
+        super().display_info()
+        print(f"Student ID: {self.student_id}")
+
+# Example Usage:
+student = Student("Bob", 20, "S12345")
+student.display_info()
+# Expected Output:
+# Name: Bob, Age: 20
+# Student ID: S12345
+
+
+
+
+
+QUESTION 5
+#Encapsulation - Private Attributes in a BankAccount Class
+#Demonstrate encapsulation by making class attributes private and providing getter and setter methods.
+#Create a class BankAccount with private attributes __account_number and __balance.
+#Implement methods deposit, withdraw, get_balance, and get_account_number.
+#Ensure that balance cannot be negative.
+
+class BankAccount:
+    def __init__(self, account_number, balance=0):
+        self.__account_number = account_number
+        self.__balance = balance
+    
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited ${amount}. New balance: ${self.__balance}")
+        else:
+            print("Deposit amount must be positive.")
+    
+    def withdraw(self, amount):
+        if amount > self.__balance:
+            print("Insufficient funds.")
+        elif amount <= 0:
+            print("Withdrawal amount must be positive.")
+        else:
+            self.__balance -= amount
+            print(f"Withdrew ${amount}. New balance: ${self.__balance}")
+    
+    def get_balance(self):
+        return self.__balance
+    
+    def get_account_number(self):
+        return self.__account_number
+
+# Example Usage:
+account = BankAccount("A001", 500)
+account.deposit(200)    # Expected Output: Deposited $200. New balance: $700
+account.withdraw(100)   # Expected Output: Withdrew $100. New balance: $600
+print(account.get_balance())        # Expected Output: 600
+print(account.get_account_number()) # Expected Output: A001
+
+
+
+
+
+QUESTION 6
+Polymorphism - Shape Classes with area Method
+#Use polymorphism by creating multiple shape classes that implement an area method differently.
+#Define a base class Shape with a method area.
+#Create subclasses Circle, Square, and Triangle that override the area method.
+#Demonstrate polymorphism by calculating the area of different shapes using the same interface.
+
+import math
+
+class Shape:
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+    
+    def area(self):
+        return math.pi * (self.radius ** 2)
+
+class Square(Shape):
+    def __init__(self, side):
+        self.side = side
+    
+    def area(self):
+        return self.side * self.side
+
+class Triangle(Shape):
+    def __init__(self, base, height):
+        self.base = base
+        self.height = height
+    
+    def area(self):
+        return 0.5 * self.base * self.height
+
+# Example Usage:
+shapes = [
+    Circle(3),
+    Square(4),
+    Triangle(5, 2)
+]
+
+for shape in shapes:
+    print(f"Area: {shape.area()}")
+# Expected Output:
+# Area: 28.274333882308138
+# Area: 16
+# Area: 5.0
+
+
+
+
+QUESTION 7
+Composition - Library Class Containing Book Objects
+#Demonstrate composition by creating a Library class that contains multiple Book objects.
+#Use the Book class from Problem 1.
+#Create a Library class with an attribute books (a list).
+#Implement methods add_book, remove_book, and display_books.
+#Ensure that books can be added and removed correctly.
+
+class Library:
+    def __init__(self):
+        self.books = []
+    
+    def add_book(self, book):
+        self.books.append(book)
+        print(f"Added book: {book.title}")
+    
+    def remove_book(self, title):
+        for book in self.books:
+            if book.title == title:
+                self.books.remove(book)
+                print(f"Removed book: {title}")
+                return
+        print(f"Book titled '{title}' not found.")
+    
+    def display_books(self):
+        if not self.books:
+            print("No books in the library.")
+        else:
+            for book in self.books:
+                book.display_info()
+
+# Example Usage:
+library = Library()
+library.add_book(book1)
+library.add_book(Book("To Kill a Mockingbird", "Harper Lee", 12.99))
+library.display_books()
+# Expected Output:
+# Added book: 1984
+# Added book: To Kill a Mockingbird
+# Title: 1984, Author: George Orwell, Price: $15.99
+# Title: To Kill a Mockingbird, Author: Harper Lee, Price: $12.99
+
+library.remove_book("1984")
+library.display_books()
+# Expected Output:
+# Removed book: 1984
+# Title: To Kill a Mockingbird, Author: Harper Lee, Price: $12.99
+
+
+
+
+
+QUESTION 8
+ Implement a Student Class with GPA Calculation
+
+#Create a Student class that can calculate the GPA based on a list of grades.
+#Define a class Student with attributes name, student_id, and grades (a list of integers).
+#Implement a method calculate_gpa that returns the average of the grades.
+#Include a method add_grade to add a new grade to the list.
+
+class Student:
+    def __init__(self, name, student_id, grades=None):
+        self.name = name
+        self.student_id = student_id
+        self.grades = grades if grades is not None else []
+    
+    def calculate_gpa(self):
+        if not self.grades:
+            return 0
+        return sum(self.grades) / len(self.grades)
+    
+    def add_grade(self, grade):
+        self.grades.append(grade)
+        print(f"Added grade: {grade}")
+
+# Example Usage:
+student = Student("Diana", "S1002", [85, 90, 78])
+print(f"GPA: {student.calculate_gpa()}")  # Expected Output: GPA: 84.33333333333333
+student.add_grade(92)
+print(f"GPA: {student.calculate_gpa()}")  # Expected Output: GPA: 86.25
+
+
+
+
+
+QUESTION 9
+Create a Car Class with Inheritance and Method Overriding
+#Implement inheritance by creating a Car class and a subclass ElectricCar that overrides a method.
+#Define a base class Car with attributes make, model, and year.
+#Implement a method description that returns a string with car details.
+#Create a subclass ElectricCar that inherits from Car and adds battery_size.
+#Override the description method to include battery size.
+
+
+
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make
+        self.model = model
+        self.year = year
+    
+    def description(self):
+        return f"{self.year} {self.make} {self.model}"
+
+class ElectricCar(Car):
+    def __init__(self, make, model, year, battery_size):
+        super().__init__(make, model, year)
+        self.battery_size = battery_size
+    
+    def description(self):
+        base_description = super().description()
+        return f"{base_description} with a {self.battery_size}-kWh battery"
+
+# Example Usage:
+car = Car("Toyota", "Corolla", 2020)
+electric_car = ElectricCar("Tesla", "Model S", 2021, 100)
+
+print(car.description())          # Expected Output: 2020 Toyota Corolla
+print(electric_car.description()) # Expected Output: 2021 Tesla Model S with a 100-kWh battery
+
+
+
+
+
+QUESTION 10
+Implement a Bank Class Managing Multiple BankAccount Objects
+#Create a Bank class that can manage multiple BankAccount instances, allowing deposits, withdrawals, and displaying all account balances.
+#Use the BankAccount class from Problem 5.
+#Define a class Bank with an attribute accounts (a list of BankAccount objects).
+#Implement methods add_account, deposit_to_account, withdraw_from_account, and display_all_balances.
+#Identify accounts by their account number.
+
+class Bank:
+    def __init__(self):
+        self.accounts = []
+    
+    def add_account(self, account):
+        self.accounts.append(account)
+        print(f"Added account: {account.get_account_number()}")
+    
+    def deposit_to_account(self, account_number, amount):
+        for account in self.accounts:
+            if account.get_account_number() == account_number:
+                account.deposit(amount)
+                return
+        print(f"Account {account_number} not found.")
+    
+    def withdraw_from_account(self, account_number, amount):
+        for account in self.accounts:
+            if account.get_account_number() == account_number:
+                account.withdraw(amount)
+                return
+        print(f"Account {account_number} not found.")
+    
+    def display_all_balances(self):
+        for account in self.accounts:
+            print(f"Account {account.get_account_number()} Balance: ${account.get_balance()}")
+
+# Example Usage:
+bank = Bank()
+account1 = BankAccount("A001", 1000)
+account2 = BankAccount("A002", 2000)
+bank.add_account(account1)
+bank.add_account(account2)
+
+bank.deposit_to_account("A001", 500)     # Expected Output: Deposited $500. New balance: $1500
+bank.withdraw_from_account("A002", 300)  # Expected Output: Withdrew $300. New balance: $1700
+bank.display_all_balances()
+# Expected Output:
+# Account A001 Balance: 1500
+# Account A002 Balance: 1700
